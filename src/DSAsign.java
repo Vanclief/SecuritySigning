@@ -5,11 +5,11 @@ public class DSAsign {
 
 	public static void main(String[] args) {
 		if (args.length != 1) {
-			// No tiene en el argumento el archivo a firmar
+			// No tiene los argumentos correctos para el programa
 			System.out.println("Uso: DSAsign <archivo>");
 		} else {
 			try {
-				// Guardia tiempo inicial
+				// Guarda tiempo inicial
 				double iTime = System.nanoTime();
 
 				// Inicializa instancia del generador con DSA y del generador random
@@ -25,7 +25,7 @@ public class DSAsign {
 				PublicKey pub = pair.getPublic();
 
 				// Inicializa objecto de firma con la llave privada
-				Signature dsa = Signature.getInstance("SHA1withDSA", "SUN");
+				Signature dsa = Signature.getInstance("SHA1withDSA");
 				dsa.initSign(priv);
 
 				// Lee el archivo a firmar
@@ -42,8 +42,8 @@ public class DSAsign {
 				// Generar firma del archivo leido
 				byte[] realSignature = dsa.sign();
 
-				// Guardia tiempo final
-				double mTime = System.nanoTime();
+				// Guarda tiempo final
+				double fTime = System.nanoTime();
 
 				// Guarda la firma en archivo
 				FileOutputStream signFileOutput = new FileOutputStream("DSAs.txt");
@@ -57,8 +57,8 @@ public class DSAsign {
 				keyFileOutput.close();
 
 				// Despliega tiempo
-				double fTime = (mTime - iTime) / 1000000.0;
-				System.out.println("Tiempo transcurrido: " + fTime + "ms");
+				double time = (fTime - iTime) / 1000000.0;
+				System.out.println("Tiempo transcurrido: " + time + "ms");
 
 			} catch (Exception e) {
 				System.err.println("Caught exception " + e.toString());
