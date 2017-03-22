@@ -8,9 +8,15 @@ public class SecuritySigning {
 
         String message = "This is the message being signed";
 
+        double iTime, mTime, fTime;
+        //= System.nanoTime();
+
+        iTime = System.nanoTime();
+
         // Declare new key generator and define key size
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         keyPairGenerator.initialize(1024); // This defines the key size
+
         // Generate a new key
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
         PrivateKey privateKey = keyPair.getPrivate();
@@ -30,11 +36,16 @@ public class SecuritySigning {
         cipher.init(Cipher.ENCRYPT_MODE, privateKey);
         byte[] c = cipher.doFinal(d);
 
+        mTime = System.nanoTime();
+
+        fTime = mTime - iTime;
+
         // Display results
         System.out.println("m: " + message);
         System.out.println("d: " + byteArray2Hex(d));
         System.out.println("e: " + byteArray2Hex(c));
         System.out.println("sign: " + byteArray2Hex(sign));
+        System.out.println("elapsed time: " + fTime);
 
     }
 
