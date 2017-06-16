@@ -21,7 +21,7 @@ public class RSAver {
 		        X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(encodedKey);
 
 		        // Genera llave con la llave publica dada
-		        KeyFactory keyFactory = KeyFactory.getInstance("RSA", "SUN");
+		        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 	        	PublicKey pubKey = keyFactory.generatePublic(pubKeySpec);
 
 		        // Lee el archivo de la firma
@@ -31,7 +31,7 @@ public class RSAver {
 		        signFileInput.close();
 
 		        // Inicializa firma con la llave publica
-		        Signature sign = Signature.getInstance("SHA1withDSA", "SUN");
+		        Signature sign = Signature.getInstance("SHA1withRSA");
 	        	sign.initVerify(pubKey);
 
 	        	// Verifica la firma al leer el archivo
